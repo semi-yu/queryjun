@@ -1,7 +1,7 @@
 from django.db import models
 
-from ..question.models import Question
-from ..member.models import Member
+from question.models import Question
+from member.models import Member
 
 # Create your models here.
 class VendorOption(models.Model):

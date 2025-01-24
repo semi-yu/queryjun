@@ -1,7 +1,7 @@
 import psycopg
 from time import time as clock
 
-from ...submit.models import Guess
+from submit.models import Guess
 
 from .database_configuration import POSTGRESQL_HOST, POSTGRESQL_DB_NAME , POSTGRESQL_USERNAME, POSTGRESQL_PASSWORD, POSTGRESQL_PORT
 

@@ -5,7 +5,7 @@ from django.shortcuts import resolve_url, render, redirect
 
 from ..forms import GuessSubmitForm
 from ..models import Guess, VendorOption
-from ...question.models import Question
+from question.models import Question
 
 class SubmitGuessView(views.View):
     """

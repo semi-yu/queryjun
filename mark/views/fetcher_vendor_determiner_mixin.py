@@ -1,5 +1,5 @@
 from .database_fetcher import DatabaseFetcher, PostgresqlFetcher
-from ...submit.models import Guess
+from submit.models import Guess
 
 class FetcherVendorDeterminerMixin(object):
     def determine_vendor(self, guess: Guess) -> DatabaseFetcher:

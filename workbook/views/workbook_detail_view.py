@@ -3,7 +3,6 @@ from django import views
 from django.shortcuts import render
 
 from ..models import Workbook
-from ...question.models import Question
 
 class WorkbookDetailView(views.View):
     def get(self, request, *args, **kwargs):

@@ -2,8 +2,8 @@ from django import views
 from django.http import HttpRequest
 from django.shortcuts import render
 
-from ...member.models import Member
-from ...submit.models import Guess
+from member.models import Member
+from submit.models import Guess
 
 from .marking_service import DefaultMarkingService
 from .fetcher_vendor_determiner_mixin import FetcherVendorDeterminerMixin

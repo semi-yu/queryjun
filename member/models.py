@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from ..question.models import Question
+from question.models import Question
 
 class Member(AbstractUser):    
     nickname = models.CharField(max_length=30)

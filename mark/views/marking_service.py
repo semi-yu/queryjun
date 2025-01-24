@@ -1,6 +1,6 @@
 from ..models import GuessResult, ResultType, GuessResultError
-from ...submit.models import Guess
-from ...member.models import Member
+from submit.models import Guess
+from member.models import Member
 
 from .database_fetcher import DatabaseFetcher
 from .comparer import DefaultComparer

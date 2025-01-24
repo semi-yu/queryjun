@@ -1,8 +1,6 @@
 from django import views
 from django.shortcuts import render
 
-from ...workbook.models import Workbook
-
 from .workbook_paginate_mixin import WorkbookPaginateMixin
 
 class WorkbookListView(WorkbookPaginateMixin, views.View):

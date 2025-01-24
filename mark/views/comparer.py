@@ -1,4 +1,4 @@
-from ...question.models import Question
+from question.models import Question
 from .database_fetcher import DatabaseFetcher
 
 class DefaultComparer:

@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 
 from ..models import Member
-from ...mark.models import GuessResult
+from mark.models import GuessResult
 from .specific_member_mixin import SpecificMemberMixin
 
 class MemberDetailView(SpecificMemberMixin, TemplateView):

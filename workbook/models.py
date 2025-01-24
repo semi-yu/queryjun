@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..question.models import Question 
+from question.models import Question 
 
 # Create your models here.
 

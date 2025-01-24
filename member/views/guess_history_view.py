@@ -2,8 +2,8 @@ from django import views
 from django.http import Http404, HttpRequest
 from django.shortcuts import render
 
-from ...member.models import Member
-from ...mark.models import GuessResult
+from member.models import Member
+from mark.models import GuessResult
 
 from .specific_member_mixin import SpecificMemberMixin
 

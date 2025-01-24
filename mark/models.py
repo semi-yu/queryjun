@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..submit.models import Guess
+from submit.models import Guess
 
 # Create your models here.
 
