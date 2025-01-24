@@ -2,11 +2,11 @@ from django import views
 from django.http import HttpRequest
 from django.shortcuts import render
 
-from ...question.models import Question
-from ...workbook.models import Workbook
+from question.models import Question
+from workbook.models import Workbook
 
-from ...question.views.question_paginate_mixin import QuesitionPaginateMixin
-from ...workbook.views.workbook_paginate_mixin import WorkbookPaginateMixin
+from question.views.question_paginate_mixin import QuesitionPaginateMixin
+from workbook.views.workbook_paginate_mixin import WorkbookPaginateMixin
 
 class MainView(QuesitionPaginateMixin, WorkbookPaginateMixin, views.View):
     """
