@@ -149,3 +149,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # Newly defined user model:
 AUTH_USER_MODEL = 'member.Member'
+
+# Celery
+from .celery_settings import CELERY_BROKER_URL, CELERY_RESULT_BACKEND
