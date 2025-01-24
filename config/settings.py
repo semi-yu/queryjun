@@ -52,13 +52,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'queryjun.main', 
-    'queryjun.member',
-    'queryjun.question',
-    'queryjun.submit',
-    'queryjun.mark', 
-    'queryjun.workbook',
-    'queryjun.notice',
+    'main',
+    'member',
+    'question',
+    'submit',
+    'mark',
+    'workbook',
+    'notice',
+    'celtest',
 ]
 
 MIDDLEWARE = [

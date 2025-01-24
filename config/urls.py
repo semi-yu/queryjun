@@ -19,11 +19,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('queryjun.main.urls')), 
-    path('member/', include('queryjun.member.urls')),
-    path('question/', include('queryjun.question.urls')),
-    path('submit/', include(('queryjun.submit.urls', 'submit'), namespace='submit')),
-    path('mark/', include('queryjun.mark.urls')), 
-    path('workbook/', include('queryjun.workbook.urls')), 
-    path('notice/', include('queryjun.notice.urls')), 
+    path('', include('main.urls')),
+    path('member/', include('member.urls')),
+    path('question/', include('question.urls')),
+    path('submit/', include(('submit.urls', 'submit'), namespace='submit')),
+    path('mark/', include('mark.urls')),
+    path('workbook/', include('workbook.urls')),
+    path('notice/', include('notice.urls')),
+    path('test/', include('celtest.urls')),
 ]
