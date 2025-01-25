@@ -17,26 +17,12 @@ class MarkGuessView(views.View):
             :param *args:
             :param **kwargs: 
         """
+        request_marking_guess.delay({ 'guess_id': kwargs['guess_id'] })
+
         guess = Guess.objects.get(id=kwargs['guess_id'])
-
-        self.request_mark(guess)
-
         context = {
             'guess': guess,
             'question': guess.question,
         }
 
         return render(request, '../templates/guess_result.html', context)
-    
-    def request_mark(self, guess: Guess):
-        """
-            Make a marking request
-        """
-        database_fetcher = FetcherVendorDeterminerService.determine_vendor(guess)
-
-        comparer = DefaultComparer(database_fetcher, guess.question)
-        marking_service = DefaultMarkingService(database_fetcher, comparer, guess)
-
-        marking_service.mark()
-
-        # request_marking.delay()
