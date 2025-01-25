@@ -1,7 +1,7 @@
 from submit.models import Guess
 
-from .fetchers.database_fetcher import DatabaseFetcher
-from .fetchers.postgresql_fetcher import PostgresqlFetcher
+from mark.views.fetchers.database_fetcher import DatabaseFetcher
+from mark.views.fetchers.postgresql_fetcher import PostgresqlFetcher
 
 class FetcherVendorDeterminerService(object):
     @classmethod
