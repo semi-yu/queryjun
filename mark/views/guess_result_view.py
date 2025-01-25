@@ -1,9 +1,7 @@
 from django import views
 from django.http import HttpRequest, JsonResponse
 
-from ..models import ResultType
-from ..models import GuessResult
-from ..models import GuessResultError
+from mark.models import ResultType, GuessResult, GuessResultError
 
 class GuessResultView(views.View):
     """
