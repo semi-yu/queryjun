@@ -9,17 +9,15 @@ class DefaultMarkingService:
     """
         A service layer for query marking
     """
-    def __init__(self, member: Member, guess: Guess, database_fetcher: DatabaseFetcher, comparer: DefaultComparer):
+    def __init__(self, database_fetcher: DatabaseFetcher, comparer: DefaultComparer, guess: Guess):
         """
-        :param member:
         :param guess:
         :param database_fetcher:
         :param comparer:
         """
-        self.member = member
-        self.guess = guess
         self.database_fetcher = database_fetcher
         self.comparer = comparer
+        self.guess = guess
 
     def mark(self) -> None:
         """
