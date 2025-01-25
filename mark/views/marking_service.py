@@ -35,11 +35,11 @@ class DefaultMarkingService:
             guess=self.guess
         )
         guess_result.save()
-        
-        if result_type == ResultType.objects.get(result_acronym='CLR'):
-            self.member.solved_question.add(self.guess.question)
 
-        if self.database_fetcher.has_query_exception():
+        if self.is_query_succeed(result_type):
+            member = Member.objects.get(id=self.guess.submitter_id)
+            member.solved_question.add(self.guess.question)
+        elif self.has_query_exception(result_type):
             GuessResultError(
                 exception_message=self.database_fetcher.query_exception(),
                 guess_result=guess_result
@@ -59,3 +59,9 @@ class DefaultMarkingService:
             return rto.get(result_acronym='FL')
         else:
             return rto.get(result_acronym='CLR')
+
+    def is_query_succeed(self, result_type) -> bool:
+        return result_type == ResultType.objects.get(result_acronym='CLR')
+
+    def has_query_exception(self, result_type) -> bool:
+        return result_type == ResultType.objects.get(result_acronym='ERR')
