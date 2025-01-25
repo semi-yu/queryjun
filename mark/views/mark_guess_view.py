@@ -3,10 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import render
 
 from submit.models import Guess
-
-from .marking_service import DefaultMarkingService
-from .fetcher_vendor_determiner_service import FetcherVendorDeterminerService
-from .comparer import DefaultComparer
+from mark.tasks import request_marking_guess
 
 class MarkGuessView(views.View):
     """
