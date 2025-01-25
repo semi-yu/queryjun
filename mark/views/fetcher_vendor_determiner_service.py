@@ -5,7 +5,7 @@ from .fetchers.postgresql_fetcher import PostgresqlFetcher
 
 class FetcherVendorDeterminerService(object):
     @classmethod
-    def determine_vendor(cls, guess: Guess) -> DatabaseFetcher:
+    def determine(cls, guess: Guess) -> DatabaseFetcher:
         vendor_name = guess.selected_vendor.system_name
 
         if vendor_name == 'postgresql':
