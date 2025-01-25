@@ -27,7 +27,7 @@ class DefaultMarkingService:
         """
         self.database_fetcher.execute_guess()
         
-        result_type = self._decide_result_type()
+        result_type = self.decide_result_type()
 
         guess_result = GuessResult(
             total_execution_time = self.database_fetcher.time(),
@@ -45,7 +45,7 @@ class DefaultMarkingService:
                 guess_result=guess_result
             ).save()
 
-    def _decide_result_type(self) -> ResultType:
+    def decide_result_type(self) -> ResultType:
         """
             Decide which result type should be the guess's mark result
         """

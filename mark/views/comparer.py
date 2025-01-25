@@ -17,15 +17,15 @@ class DefaultComparer:
         """
             Compare a query result and answer
         """
-        return self._clean_guess() == self._clean_answer()
+        return self.clean_guess() == self.clean_answer()
 
-    def _clean_guess(self) -> str:
+    def clean_guess(self) -> str:
         """
             Get a string from query result
         """
         return str(self.database_fetcher.result())
     
-    def _clean_answer(self) -> str:
+    def clean_answer(self) -> str:
         """
             Get a answer string from quetion
         """
