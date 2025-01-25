@@ -5,10 +5,10 @@ from django.shortcuts import render
 from submit.models import Guess
 
 from .marking_service import DefaultMarkingService
-from .fetcher_vendor_determiner_mixin import FetcherVendorDeterminerMixin
+from .fetcher_vendor_determiner_service import FetcherVendorDeterminerService
 from .comparer import DefaultComparer
 
-class MarkGuessView(FetcherVendorDeterminerMixin, views.View):
+class MarkGuessView(views.View):
     """
         A CBV for marking gussed query and displaying guess result page
     """
@@ -21,7 +21,8 @@ class MarkGuessView(FetcherVendorDeterminerMixin, views.View):
             :param **kwargs: 
         """
         guess = Guess.objects.get(id=kwargs['guess_id'])
-        self.request_mark(request.user, guess)
+
+        self.request_mark(guess)
 
         context = {
             'guess': guess,
@@ -30,13 +31,15 @@ class MarkGuessView(FetcherVendorDeterminerMixin, views.View):
 
         return render(request, '../templates/guess_result.html', context)
     
-    def request_mark(self, member: Member, guess: Guess):
+    def request_mark(self, guess: Guess):
         """
             Make a marking request
         """
-        database_fetcher = self.determine_vendor(guess)
+        database_fetcher = FetcherVendorDeterminerService.determine_vendor(guess)
 
-        comparer = DefaultComparer(guess.question, database_fetcher)
-        marking_service = DefaultMarkingService(member, guess, database_fetcher, comparer)
+        comparer = DefaultComparer(database_fetcher, guess.question)
+        marking_service = DefaultMarkingService(database_fetcher, comparer, guess)
+
+        marking_service.mark()
 
         marking_service.mark()
