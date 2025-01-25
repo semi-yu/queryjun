@@ -1,5 +1,6 @@
 from question.models import Question
-from .fetchers.database_fetcher import DatabaseFetcher
+
+from mark.views.fetchers.database_fetcher import DatabaseFetcher
 
 class DefaultComparer:
     """
