@@ -5,7 +5,7 @@ class DefaultComparer:
     """
         Service layer module for comparing question answer and its guessing query
     """
-    def __init__(self, question: Question, database_fetcher: DatabaseFetcher):
+    def __init__(self, database_fetcher: DatabaseFetcher, question: Question):
         """
         :param question:
         :param database_fetcher:
