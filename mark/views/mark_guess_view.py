@@ -42,4 +42,4 @@ class MarkGuessView(views.View):
 
         marking_service.mark()
 
-        marking_service.mark()
+        # request_marking.delay()

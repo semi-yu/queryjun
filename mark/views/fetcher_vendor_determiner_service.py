@@ -1,5 +1,7 @@
-from .database_fetcher import DatabaseFetcher, PostgresqlFetcher
 from submit.models import Guess
+
+from .fetchers.database_fetcher import DatabaseFetcher
+from .fetchers.postgresql_fetcher import PostgresqlFetcher
 
 class FetcherVendorDeterminerService(object):
     @classmethod

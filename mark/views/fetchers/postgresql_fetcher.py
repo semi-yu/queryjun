@@ -3,54 +3,9 @@ from time import time as clock
 
 from submit.models import Guess
 
+from .database_fetcher import DatabaseFetcher
 from .database_configuration import POSTGRESQL_HOST, POSTGRESQL_DB_NAME , POSTGRESQL_USERNAME, POSTGRESQL_PASSWORD, POSTGRESQL_PORT
 
-class DatabaseFetcher:
-    """
-        An interface for Database access
-    """
-    def __init__(self, guess: Guess):
-        """
-
-        """
-        raise Exception("Method must be implemented")
-    
-    def execute_guess(self) -> list[tuple]:
-        """
-            Execute the given query & fetch result from database
-            :param guess: source of guessed query
-        """
-        raise Exception("Method must be implemented")
-
-    def time(self) -> None | float: 
-        """
-            Return a query execution time
-        """
-        raise Exception("Method must be implemented")
-    
-    def result(self) -> None | list[tuple[str | float | int]]:
-        """
-            Return a fetched result after executing a query
-        """
-        raise Exception("Method must be implemented")
-    
-    def is_query_overtime(self) -> bool:
-        """
-            True if query executing time has surpassed its limit
-        """
-        raise Exception("Method must be implemented")
-    
-    def has_query_exception(self) -> bool:
-        """
-            True if query have problem executed in DBMS
-        """
-        raise Exception("Method must be implemented")
-    
-    def query_exception(self) -> str:
-        """
-            Get query exception hints
-        """
-        raise Exception("Method must be implemented")
 
 class PostgresqlFetcher(DatabaseFetcher):
     """
