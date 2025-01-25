@@ -11,8 +11,8 @@ from mark.views.marking_service_mapper import MarkingServiceMapper
 
 
 @shared_task
-def request_marking_guess(json):
-    guess = Guess.objects.get(id=json['guess_id'])
+def request_marking_guess(tags):
+    guess = Guess.objects.get(id=tags['guess_id'])
     question = Question.objects.get(id=guess.question_id)
 
     fetcher = FetcherVendorDeterminerService.determine(guess)
