@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'mark',
     'workbook',
     'notice',
-    'celtest',
 ]
 
 MIDDLEWARE = [
