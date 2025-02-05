@@ -209,4 +209,7 @@ $RECYCLE.BIN/
 # Celery
 *celery_settings.py
 
+# docker
+docker_storage/
+
 # End of https://www.toptal.com/developers/gitignore/api/django,windows
