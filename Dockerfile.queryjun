@@ -1,0 +1,31 @@
+# 파이썬 환경에서 시작
+FROM python:slim-bullseye
+
+# 네트워크 설정 볼 수 있는 유틸리티 설치
+RUN apt-get update && apt-get install -y \
+    net-tools \
+    dnsutils \
+    systemd \
+    vim \
+    curl
+
+# 파이썬 출력 버퍼 제거 -> 로그 출력을 위해서 설정
+ENV PYTHONBUFFERED 0
+
+WORKDIR /home/queryjun
+
+RUN pip3 install --upgrade pip
+
+# 개발 모든 파일을 컨테이너에 추가
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Supervisor 설정 추가
+COPY supervisord.conf /etc/supervisord.conf
+
+# 나머지 파일 복사
+COPY . .
+
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+
+EXPOSE 8000
