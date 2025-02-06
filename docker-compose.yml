@@ -25,6 +25,7 @@ services:
       dockerfile: ./Dockerfile.nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./docker_storage/nginx/access.log:/var/log/nginx/access.log
       - ./docker_storage/nginx/error.log:/var/log/nginx/error.log
