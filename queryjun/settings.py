@@ -32,7 +32,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -146,7 +146,7 @@ from .celery_settings import CELERY_BROKER_URL, CELERY_RESULT_BACKEND
 
 # Security
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 
 # Cookies
 SESSION_COOKIE_SECURE = True
