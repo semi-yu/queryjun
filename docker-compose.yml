@@ -16,6 +16,7 @@ services:
       - rabbitmq
     env_file:
       - ./.env/django-env
+      - ./.env/postgres-solving-env
 
   # Web server
   nginx:
