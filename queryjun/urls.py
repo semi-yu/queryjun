@@ -26,5 +26,4 @@ urlpatterns = [
     path('mark/', include('mark.urls')),
     path('workbook/', include('workbook.urls')),
     path('notice/', include('notice.urls')),
-    path('test/', include('celtest.urls')),
 ]
