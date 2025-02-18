@@ -206,9 +206,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Celery
-*celery_settings.py
-
 # docker
 docker_storage/
 
