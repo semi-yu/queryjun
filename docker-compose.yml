@@ -17,6 +17,7 @@ services:
     env_file:
       - ./.env/django-env
       - ./.env/postgres-solving-env
+      - ./.env/rabbitmq-env
 
   # Web server
   nginx:
@@ -62,11 +63,14 @@ services:
     env_file:
       - ./.env/rabbitmq-env
     volumes:
+      - ./deploy-settings/rabbitmq/entrypoint.sh:/usr/local/bin/entrypoint.sh
+      - ./deploy-settings/rabbitmq/definitions.template.json:/etc/rabbitmq/definitions.template.json
       - ./docker_storage/rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./docker_storage/rabbitmq/data:/var/lib/rabbitmq
       - ./docker_storage/rabbitmq/logs:/var/log/rabbitmq
     networks:
       - deploy-network
+    entrypoint: ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
 
 networks:
   deploy-network:

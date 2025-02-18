@@ -1,0 +1,25 @@
+{
+    "rabbit_version": "4.0",
+    "users": [
+        {
+            "name": "${RABBITMQ_USER}",
+            "password": "${RABBITMQ_PASSWORD_HASHED}",
+            "hashing_algorithm": "${RABBITMQ_PASSWORD_HASH_ALGORITHM}",
+            "tags": "${RABBITMQ_REQUESTER_TAG}"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "${RABBITMQ_USER}",
+            "vhost": "/",
+            "configure": "${RABBITMQ_REQUESTER_CONF_PERM}",
+            "write": "${RABBITMQ_REQUESTER_WRITE_PERM}",
+            "read": "${RABBITMQ_REQUESTER_READ_PERM}"
+        }
+    ]
+}
