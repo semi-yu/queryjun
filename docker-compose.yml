@@ -36,7 +36,7 @@ services:
     depends_on:
       - queryjun
 
-  # Postgres containe for executing queries
+  # Postgres container for executing queries
   postgres_solving:
     image: postgres:latest
     container_name: postgres-solving
@@ -47,8 +47,8 @@ services:
       - ./.env/postgres-solving-env
     shm_size: 128mb
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./entrypoint.sh:/docker-entrypoint-intdb.d/entrypoint.sh
+      - ./deploy-settings/postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./deploy-settings/postgresql/entrypoint.sh:/docker-entrypoint-intdb.d/entrypoint.sh
       - ./docker_storage/postgres:/var/lib/postgresql/data
     networks:
       - deploy-network
