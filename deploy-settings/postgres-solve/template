@@ -1,0 +1,26 @@
+-- 
+CREATE USER ${POSTGRES_USERNAME} WITH PASSWORD '${POSTGRES_PASSWORD}';
+
+-- 1. Set database and grant marker to connect
+-- CREATE DATABASE queryjun_problems;
+GRANT CONNECT ON DATABASE queryjun_problems TO ${POSTGRES_USERNAME};
+
+-- 2.0. Connect
+\c queryjun_problems
+
+-- 2. Make schema and table
+CREATE SCHEMA selections_for_novice AUTHORIZATION ${POSTGRES_USERNAME};
+SET search_path TO selections_for_novice;
+
+CREATE TABLE selections_for_novice.problem_01 (
+    MESSAGE VARCHAR(100)
+);
+
+-- 3. Restrcit previlage to marker:
+GRANT USAGE ON SCHEMA selections_for_novice TO ${POSTGRES_USERNAME};
+GRANT SELECT ON TABLE selections_for_novice.problem_01 TO ${POSTGRES_USERNAME};
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA selections_for_novice GRANT SELECT ON TABLES TO ${POSTGRES_USERNAME};
+
+-- 4. Set problems
+INSERT INTO selections_for_novice.problem_01 VALUES ('Welcome to the QueryJun');

@@ -12,12 +12,14 @@ services:
     networks:
       - deploy-network
     depends_on:
-      - postgres_solving
+      - postgres_serve
+      - postgres_solve
       - rabbitmq
     env_file:
-      - ./.env/django-env
-      - ./.env/postgres-solving-env
-      - ./.env/rabbitmq-env
+      - ./env/.env.django
+      - ./env/.env.postgres-solve
+      - ./env/.env.postgres-serve
+      - ./env/.env.rabbitmq
 
   # Web server
   nginx:
@@ -29,27 +31,57 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker_storage/nginx/access.log:/var/log/nginx/access.log
-      - ./docker_storage/nginx/error.log:/var/log/nginx/error.log
+      - ./deploy-settings/nginx/certificate.sh:/etc/certificate.sh
+      - ./deploy-settings/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker-storage/nginx/access.log:/var/log/nginx/access.log
+      - ./docker-storage/nginx/error.log:/var/log/nginx/error.log
     networks:
       - deploy-network
     depends_on:
       - queryjun
 
-  # Postgres container for executing queries
-  postgres_solving:
+  # Postgres container for storing service data
+  postgres_serve:
     image: postgres:latest
-    container_name: postgres-solving
+    container_name: postgres-serve
     expose:
       - "5432"
     env_file:
-      - ./.env/postgres-env
-      - ./.env/postgres-solving-env
+      - ./env/.env.postgres-serve
+    environment:
+      POSTGRES_DB: ${POSTGRES_SERVE_DB}
+      POSTGRES_USERNAME: ${POSTGRES_SERVE_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_SERVE_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_SERVE_PORT}
+      POSTGRES_HOST: ${POSTGRES_SERVE_HOST}
     shm_size: 128mb
     volumes:
-      - ./deploy-settings/postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./deploy-settings/postgresql/entrypoint.sh:/docker-entrypoint-intdb.d/entrypoint.sh
-      - ./docker_storage/postgres:/var/lib/postgresql/data
+      - ./deploy-settings/postgres-serve/template:/docker-entrypoint-initdb.d/template
+      - ./deploy-settings/postgres-serve/entrypoint.sh:/docker-entrypoint-inidb.d/entrypoint.sh
+      - ./docker-storage/postgres-serve:/var/lib/postgresql/data
+    networks:
+      - deploy-network
+    entrypoint: ["/bin/bash", "/docker-entrypoint-inidb.d/entrypoint.sh"]
+
+  # Postgres container for executing queries
+  postgres_solve:
+    image: postgres:latest
+    container_name: postgres-solve
+    expose:
+      - "5432"
+    env_file:
+      - ./env/.env.postgres-solve
+    environment:
+      POSTGRES_DB: ${POSTGRES_SOLVE_DB}
+      POSTGRES_USERNAME: ${POSTGRES_SOLVE_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_SOLVE_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_SOLVE_PORT}
+      POSTGRES_HOST: ${POSTGRES_SOLVE_HOST}
+    shm_size: 128mb
+    volumes:
+      - ./deploy-settings/postgres-solve/template:/docker-entrypoint-initdb.d/template
+      - ./deploy-settings/postgres-solve/entrypoint.sh:/docker-entrypoint-intdb.d/entrypoint.sh
+      - ./docker-storage/postgres-solve:/var/lib/postgresql/data
     networks:
       - deploy-network
     entrypoint: ["/bin/bash", "/docker-entrypoint-intdb.d/entrypoint.sh"]
