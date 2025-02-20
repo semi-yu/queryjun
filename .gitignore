@@ -207,6 +207,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # docker
-docker_storage/
+docker-storage/
 
 # End of https://www.toptal.com/developers/gitignore/api/django,windows
