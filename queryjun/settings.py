@@ -89,8 +89,12 @@ WSGI_APPLICATION = 'queryjun.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['POSTGRES_SERVE_DB'],
+        'USER': os.environ['POSTGRES_SERVE_USERNAME'],
+        'PASSWORD': os.environ['POSTGRES_SERVE_PASSWORD'],
+        'HOST': os.environ['POSTGRES_SERVE_HOST'],
+        'PORT': os.environ['POSTGRES_SERVE_PORT'],
     }
 }
 
