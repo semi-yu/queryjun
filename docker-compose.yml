@@ -8,7 +8,7 @@ services:
     expose:
       - "8000"
     volumes:
-      - ./docker_storage/log:/var/log/
+      - ./docker-storage/log:/var/log/
     networks:
       - deploy-network
     depends_on:
@@ -93,13 +93,13 @@ services:
     expose:
       - "5672"
     env_file:
-      - ./.env/rabbitmq-env
+      - ./env/.env.rabbitmq
     volumes:
       - ./deploy-settings/rabbitmq/entrypoint.sh:/usr/local/bin/entrypoint.sh
       - ./deploy-settings/rabbitmq/definitions.template.json:/etc/rabbitmq/definitions.template.json
-      - ./docker_storage/rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-      - ./docker_storage/rabbitmq/data:/var/lib/rabbitmq
-      - ./docker_storage/rabbitmq/logs:/var/log/rabbitmq
+      - ./docker-storage/rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./docker-storage/rabbitmq/data:/var/lib/rabbitmq
+      - ./docker-storage/rabbitmq/logs:/var/log/rabbitmq
     networks:
       - deploy-network
     entrypoint: ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
