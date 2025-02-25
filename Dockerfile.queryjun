@@ -1,31 +1,26 @@
 # 파이썬 환경에서 시작
 FROM python:slim-bullseye
 
-# 네트워크 설정 볼 수 있는 유틸리티 설치
-RUN apt-get update && apt-get install -y \
-    net-tools \
-    dnsutils \
-    systemd \
-    vim \
-    curl
-
 # 파이썬 출력 버퍼 제거 -> 로그 출력을 위해서 설정
-ENV PYTHONBUFFERED 0
+ENV PYTHONUNBUFFERED 1
 
+# Celery 사용자 추가
+RUN useradd --system --home=/var/lib/celery --shell=/bin/false celery
+
+# 작업 디렉토리 설정
 WORKDIR /home/queryjun
 
+# 파이썬 패키지 관리
 RUN pip3 install --upgrade pip
-
-# 개발 모든 파일을 컨테이너에 추가
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Supervisor 설정 추가
-COPY supervisord.conf /etc/supervisord.conf
+COPY /deploy-settings/queryjun/supervisord.conf /etc/supervisor/supervisord.conf
 
-# 나머지 파일 복사
+# Queryjun 코드 복사
 COPY . .
 
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
 EXPOSE 8000
